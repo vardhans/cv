@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->  
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->  
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->  
+<head>
+    <title>Vardhan - Web Developer</title>
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Responsive HTML5 Resume/CV Template for Developers">
+    <meta name="author" content="Xiaoying Riley at 3rd Wave Media">    
+    <link rel="shortcut icon" href="favicon.ico">  
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,400italic,300italic,300,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">   
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" href="assets/plugins/font-awesome/css/font-awesome.min.css">
+    
+    <!-- Theme CSS -->  
+    <link id="theme-style" rel="stylesheet" href="assets/css/styles-min.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="lib/angular.min.js"></script>
+    <script src="index.js"></script>
+</head> 
+
+<body ng-app="cvVardhan" ng-controller="CvController as vm">
+    <div class="wrapper">
+        <div class="sidebar-wrapper">
+            <div class="profile-container">
+                <img class="profile" ng-src="{{vm.cv.pic}}" style="border-radius: 100px;" />
+                <h1 class="name" ng-bind="vm.cv.name"></h1>
+                <h3 class="tagline" ng-bind="vm.cv.description"></h3>
+            </div>
+            <div class="contact-container container-block">
+                <ul class="list-unstyled contact-list">
+                    <li class="email"><i class="fa fa-envelope"></i><a href="mailto: {{vm.cv.contact.email}}" ng-bind="vm.cv.contact.email"></a></li>
+                    <li class="phone"><i class="fa fa-phone"></i><a href="tel:{{vm.cv.contact.mobile}}" ng-bind="vm.cv.contact.mobile"></a></li>
+                    <!--<li class="website"><i class="fa fa-globe"></i><a href="http://themes.3rdwavemedia.com/website-templates/free-responsive-website-template-for-developers/" target="_blank">portfoliosite.com</a></li>-->
+                    <li class="linkedin"><i class="fa fa-linkedin"></i><a href="{{vm.cv.contact.linkedin.link}}" target="_blank" ng-bind="vm.cv.contact.linkedin.desc"></a></li>
+                    <li class="github"><i class="fa fa-github"></i><a href="{{vm.cv.contact.github.link}}" target="_blank" ng-bind="vm.cv.contact.github.desc"></a></li>
+                    <li class="twitter"><i class="fa fa-twitter"></i><a href="{{vm.cv.contact.twitter.link}}" target="_blank" ng-bind="vm.cv.contact.twitter.desc"></a></li>
+                    <li class="cv"><i class="fa fa-cloud-download"></i><a href="{{vm.cv.contact.resume.link}}" target="_blank" ng-bind="vm.cv.contact.resume.desc"></a></li>
+                </ul>
+            </div>
+            <div class="education-container container-block">
+                <h2 class="container-block-title">Education</h2>
+                <div class="item" ng-repeat="ed in vm.cv.education">
+                    <h4 class="degree" ng-bind="ed.degree"></h4>
+                    <h5 class="meta" ng-bind="ed.uni"></h5>
+                    <div class="time" ng-bind="ed.time"></div>
+                </div>
+            </div>
+            <div class="languages-container container-block" ng-repeat="otSkill in vm.cv.otherSkills">
+                <h2 class="container-block-title" ng-bind="otSkill.groupName"></h2>
+                <ul class="list-unstyled interests-list">
+                    <li ng-bind="otSkill.list.join(', ')"></li>
+                </ul>
+            </div>
+            <div class="interests-container container-block">
+                <h2 class="container-block-title">Interests</h2>
+                <ul class="list-unstyled interests-list">
+                    <li ng-repeat="int in vm.cv.interests" ng-bind="int"></li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-wrapper">
+            <section class="section summary-section">
+                <h2 class="section-title"><i class="fa fa-user"></i>Career Profile</h2>
+                <div class="summary">
+                    <p ng-bind="vm.cv.summary"></p>
+                </div>
+            </section>
+            <section class="section experiences-section">
+                <h2 class="section-title"><i class="fa fa-briefcase"></i>Experiences</h2>
+                <div class="item" ng-repeat="exp in vm.cv.experiences">
+                    <div class="meta">
+                        <div class="upper-row">
+                            <h3 class="job-title" ng-bind="exp.role"></h3>
+                            <div class="time" ng-bind="exp.time"></div>
+                        </div>
+                        <div class="company" ng-bind="exp.company"></div>
+                    </div>
+                    <div class="details">
+                        <p ng-repeat="dt in exp.details" ng-bind="dt"></p>
+                    </div>
+                </div>
+            </section>
+            <section class="section projects-section">
+                <h2 class="section-title"><i class="fa fa-archive"></i>Projects</h2>
+                <div class="item" ng-repeat="proj in vm.cv.projects">
+                    <span class="project-title"><a href="#" ng-bind="proj.name"></a></span> - <span class="project-tagline" ng-bind="proj.description"></span>
+                </div>
+            </section>
+            <section class="skills-section section">
+                <h2 class="section-title"><i class="fa fa-rocket"></i>Skills &amp; Proficiency</h2>
+                <div class="skillset"> 
+                    <div ng-repeat="skill in vm.cv.skills" class="item">
+                        <h3 class="level-title" ng-bind="skill.name"></h3>
+                        <div class="level-bar">
+                            <div class="level-bar-inner" data-level="{{skill.proficiency}}"></div>
+                        </div>
+                    </div>
+                </div>  
+            </section>
+        </div>
+    </div>
+    <!-- Javascript -->          
+    <script type="text/javascript" src="assets/plugins/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>    
+    <!-- custom js -->
+    <script type="text/javascript" src="assets/js/main-min.js"></script>            
+</body>
+</html> 
+
